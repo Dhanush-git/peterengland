@@ -65,4 +65,13 @@ public class UserServices {
 			return "No user with that id found";
 		}
 	}
+
+	public String deleteUser(int id) {
+		try {
+			userRepository.deleteById(id);
+			return "user deleted";
+		}catch (Exception e) {
+			return "no user with that id found";
+		}
+	}
 }

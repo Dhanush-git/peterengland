@@ -1,13 +1,13 @@
 package com.group2.peterengland.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
 import com.group2.peterengland.models.User;
 import com.group2.peterengland.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +57,9 @@ public class UserController {
 		return userServices.updateUser(id, user);
 	}
 
-	//create deletetoute
+	@DeleteMapping
+	public String deleteUser(@RequestParam int id) {
+		return userServices.deleteUser(id);
+	}
 	
 }
