@@ -23,7 +23,7 @@ public class UserServices {
 	public String createNewUser(User user) {
 		Optional<User> optionalUser = userRepository.getUserByEmail(user.getEmail());
 		
-		if(optionalUser.isPresent()) {
+		if( optionalUser.isPresent() && optionalUser.get().getEmail().equals(user.getEmail())) {
 			return "User already exists";
 		}else {
 			userRepository.save(user);
