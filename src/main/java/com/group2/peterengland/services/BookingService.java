@@ -40,6 +40,9 @@ public class BookingService {
 				int p_id = Integer.parseInt(p);
 				Optional<Inventory> product = inventoryService.getProduct(p_id);
 				if(product.isPresent()){
+					long stock = product.get().getStock() - 1;
+					product.get().setStock(stock);
+					inventoryService.update(product.get());
 					Optional<Offers> offer = offersServices.getOfferOnProductId(p_id);
 					if(offer.isPresent()){
 						if(offer.get().getStart_date().compareTo(today)<=0 && offer.get().getEnd_date().compareTo(today)>=0){
@@ -52,6 +55,7 @@ public class BookingService {
 					throw new Exception("product id:"+p_id+" not found");
 				}
 			}
+
 			booking.setTotal(total);
 			Booking newBooking = bookingRepository.save(booking);
 			Tracking tracking = new Tracking();
